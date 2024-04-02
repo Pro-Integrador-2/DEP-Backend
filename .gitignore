@@ -1,2 +1,52 @@
-.venv
-*.env
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.idea/
+.vscode/
+
+# Environment
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite3
+
+# OS generated files
+.DS_Store
+ehthumbs.db
+Thumbs.db
+
+# Ignore .bak files
+*.bak
+
+# Ignore .vs directory
+.vs/
