@@ -1,6 +1,9 @@
 import json
 import os
 import time
+from script_maker import make_script
+from sentiment_analyzer import analyzer
+from preventive_actions_generator import make_actions
 
 import boto3
 from botocore.exceptions import ClientError
@@ -28,7 +31,7 @@ transc_job_name = "DEP-transcript-job"
 
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
-    print("Received POST request")
+    print("\nReceived POST request")
     audio_file = request.files.get('audiofile')
     if not audio_file:
         return jsonify({'error': 'No se proporcionó ningún archivo'}), 400
@@ -38,13 +41,13 @@ def transcribe():
         ext = audio_file.filename[-3:]
         s3_client.upload_fileobj(audio_file, S3_BUCKET_NAME, filename)
 
-        url = s3_client.generate_presigned_url('get_object', Params={'Bucket': S3_BUCKET_NAME, 'Key': filename},
-                                               ExpiresIn=300)
-
         job_name = "DEP-call-analytics-job" + str(time.time())
 
         response = transcribe_client.start_transcription_job(TranscriptionJobName=job_name, Media={
-            'MediaFileUri': f's3://{S3_BUCKET_NAME}/{filename}'}, MediaFormat=ext, LanguageCode='es-US', OutputBucketName='my-call-audiotranscriptions-008')
+            'MediaFileUri': f's3://{S3_BUCKET_NAME}/{filename}'}, MediaFormat=ext, LanguageCode='es-US',
+                                                             OutputBucketName='my-call-audiotranscriptions-008',
+                                                             Settings={'ShowSpeakerLabels': True,
+                                                                       'MaxSpeakerLabels': 2})
         job_name_trans = response['TranscriptionJob']['TranscriptionJobName']
 
         while True:
@@ -56,9 +59,12 @@ def transcribe():
             time.sleep(5)
         if job_status == 'COMPLETED':
             transcription_uri = status['TranscriptionJob']['Transcript']['TranscriptFileUri']
-            print(status)
+
             transcription_text = get_transcription_text(transcription_uri)
-            return jsonify({'transcription': transcription_text}), 200
+
+            conversation_transcription = make_script(transcription_text)
+
+            return jsonify({'transcription': conversation_transcription}), 200
         else:
             return jsonify({'error': 'El trabajo de transcripción falló'}), 500
         return jsonify({'response': status}), 200
@@ -76,6 +82,13 @@ def get_transcription_text(transcription_uri: str):
     transcript_json = json.loads(transcript_data)
     transcript_text = transcript_json['results']['transcripts'][0]['transcript']
     return transcript_text
+
+
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    analyzer()
+    result = make_actions()
+    return jsonify({'result': result}), 200
 
 
 if __name__ == '__main__':
