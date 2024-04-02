@@ -41,11 +41,7 @@ def make_script(transcription_text):
         response_format={"type": "text"},
         messages=messages,
     )
-
+    little_paragraph = chat_response.choices[0].message.content.strip()
     with open("singleParagraph.txt", "w", encoding="utf-8") as file:
-        file.write(chat_response.choices[0].message.content.strip())
-
-    with open('singleParagraph.txt', 'r') as file:
-        little_paragraph = file.read()
-
+        file.write(little_paragraph)
     return little_paragraph

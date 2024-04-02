@@ -59,7 +59,6 @@ def transcribe():
             time.sleep(5)
         if job_status == 'COMPLETED':
             transcription_uri = status['TranscriptionJob']['Transcript']['TranscriptFileUri']
-
             transcription_text = get_transcription_text(transcription_uri)
 
             conversation_transcription = make_script(transcription_text)
