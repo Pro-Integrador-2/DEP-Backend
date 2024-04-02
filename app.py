@@ -83,7 +83,7 @@ def get_transcription_text(transcription_uri: str):
     return transcript_text
 
 
-@app.route('/analyze', methods=['POST'])
+@app.route('/analyze', methods=['GET'])
 def analyze():
     analyzer()
     result = make_actions()
