@@ -63,7 +63,8 @@ def transcribe():
 
             conversation_transcription = make_script(transcription_text)
 
-            return jsonify({'transcription': conversation_transcription}), 200
+            return jsonify({'transcription':conversation_transcription}), 200
+          
         else:
             return jsonify({'error': 'El trabajo de transcripción falló'}), 500
         return jsonify({'response': status}), 200
@@ -83,10 +84,12 @@ def get_transcription_text(transcription_uri: str):
     return transcript_text
 
 
-@app.route('/analyze', methods=['GET'])
+@app.route('/analyze', methods=['POST'])
 def analyze():
-    analyzer()
-    result = make_actions()
+    #print("reques data transcription",json.loads(request.data.decode('utf-8')).get('transcription'))
+    #analisis = analyzer(json.loads(request.data.decode('utf-8')).get('transcription'))
+    analisis = json.loads(request.data.decode('utf-8')).get('transcription')
+    result = make_actions(analisis)
     return jsonify({'result': result}), 200
 
 

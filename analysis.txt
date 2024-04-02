@@ -1,0 +1,21 @@
+Cliente Turno:  Hola, gracias por llamar a Fleco. Tengo problemas con mi línea telefónica desde dos días. No puedo hacer llamadas y la conexión a Internet es lenta. 
+Sentimiento del Cliente:  NEGATIVE
+Emoción del Cliente:  Negative
+Vendedor Turno:  Entendido. Podría darme su número de cliente o número de teléfono afectado para ayudarlo mejor? 
+Sentimiento del Vendedor:  NEUTRAL
+Emoción del Vendedor:  Neutral
+--------------------------------------------------
+Cliente Turno:  Sí, claro. Mi número de cliente es noventa y ocho, seis treinta y dos. Pueden arreglarlo, por favor? 
+Sentimiento del Cliente:  NEUTRAL
+Emoción del Cliente:  Neutral
+Vendedor Turno:  Déjame revisar en nuestra base de datos. Un momento, por favor. 
+Sentimiento del Vendedor:  NEUTRAL
+Emoción del Vendedor:  Neutral
+--------------------------------------------------
+Cliente Turno:  No, no, no. No me transfiera. No lo puede revisar de nuevo? Ah, es que eso es mucha demora. Está bien. Permítame intentarlo de nuevo. 
+Sentimiento del Cliente:  NEGATIVE
+Emoción del Cliente:  Negative
+Vendedor Turno:  Por favor, espere un momento mientras reviso. Sí, está bien. Pero que sea rápido. 
+Sentimiento del Vendedor:  NEUTRAL
+Emoción del Vendedor:  Neutral
+--------------------------------------------------

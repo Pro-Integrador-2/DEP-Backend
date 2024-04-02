@@ -5,8 +5,8 @@ from mistralai.models.chat_completion import ChatMessage
 def make_script(transcription_text):
 
     api_key = "yNsYFbqGaPPc2h0uYUUM6Ug1oNlhVLKC"
-    # model = "mistral-large-latest"
-    model = "open-mistral-7b"
+    model = "mistral-large-latest"
+    #model = "open-mistral-7b"
     client = MistralClient(api_key=api_key)
 
     # with open("elGas2.txt", "r", encoding="utf-8") as file:
